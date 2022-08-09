@@ -6,9 +6,10 @@ jobs:
     steps:
       - setup_remote_docker:
           docker_layer_caching: true
-      - run:
-          name: Clone
-          command: /stages/01_clone.sh
+#      - run:
+#          name: Clone
+#          command: /stages/01_clone.sh
+      - checkout
       - run:
           name: Build
           command: /stages/02_build.sh
