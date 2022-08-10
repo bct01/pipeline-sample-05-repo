@@ -19,6 +19,6 @@ jobs:
           command: |
             dotnet test
 
-#      - run:
-#          name: Archive
-#          command: /stages/04_archive.sh
+      - run:
+          name: Archive
+          command: stages/04_archive.sh
