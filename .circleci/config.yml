@@ -26,7 +26,8 @@ jobs:
       - run:
           name: "Deploying Application"
           command: |
-            docker run -dp "5000:5000" "docker.io/edwardsdl/sample-netcore:latest"
+            dotnet run
+#            docker run -dp "5000:5000" "docker.io/edwardsdl/sample-netcore:latest"
             
 #container_port=$(jq -r .deploy.containerPort pipeline.json)
 #registry=$(jq -r .archive.registry pipeline.json)
