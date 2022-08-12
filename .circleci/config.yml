@@ -11,7 +11,7 @@ jobs:
           name: Build
           command: |
             dotnet restore
-            dotnet build -c Release
+            dotnet build -c Release -o /app
     
       - run:
           working_directory: ./ValueTests
@@ -24,10 +24,10 @@ jobs:
 #          command: stages/04_archive.sh
 
       - run:
-          working_directory: ValueApi/bin/Debug/net6.0
+          working_directory: /app
           name: RunApp
           command: |
-            dotnet --project ValueApi.dll
+            dotnet run /app/ValueApi.dll
 #            docker run -dp "5000:5000" "docker.io/edwardsdl/sample-netcore:latest"
             
 #container_port=$(jq -r .deploy.containerPort pipeline.json)
