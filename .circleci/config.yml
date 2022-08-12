@@ -25,7 +25,7 @@ jobs:
 
       - run:
           name: "Deploying Application"
-          command: |
+#          command: |
             dotnet run
 #            docker run -dp "5000:5000" "docker.io/edwardsdl/sample-netcore:latest"
             
