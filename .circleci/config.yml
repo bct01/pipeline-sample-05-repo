@@ -24,7 +24,7 @@ jobs:
 #          command: stages/04_archive.sh
 
       - run:
-          name: "Deploying Application"
+          name: RunApp
 #          command: |
             dotnet run --project ValueApi.dll
 #            docker run -dp "5000:5000" "docker.io/edwardsdl/sample-netcore:latest"
