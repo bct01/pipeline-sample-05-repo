@@ -27,7 +27,7 @@ jobs:
           working_directory: ValueApi/bin/Release/net6.0
           name: RunApp
           command: |
-            dotnet run --project ValueApi
+            dotnet --project ValueApi.dll
 #            docker run -dp "5000:5000" "docker.io/edwardsdl/sample-netcore:latest"
             
 #container_port=$(jq -r .deploy.containerPort pipeline.json)
