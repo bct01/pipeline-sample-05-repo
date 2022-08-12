@@ -17,7 +17,7 @@ jobs:
           working_directory: ./ValueTests
           name: "test-svc"
           command: |
-            dotnet test
+            dotnet test -c Release -o /app
 
 #     - run:
 #         name: Archive
@@ -25,9 +25,9 @@ jobs:
 
       - run:
           working_directory: /app
-          name: RunApp
-          command: |
-            dotnet /app/ValueApi.dll
+          name: Running App
+#          command: |
+#            dotnet /app/ValueApi.dll
 #            docker run -dp "5000:5000" "docker.io/edwardsdl/sample-netcore:latest"
             
 #container_port=$(jq -r .deploy.containerPort pipeline.json)
@@ -36,5 +36,3 @@ jobs:
 #image="${registry}/${repository}:latest"
 
 #docker run -dp "${container_port}:${container_port}" "${image}"
-
-
