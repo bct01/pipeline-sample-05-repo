@@ -18,7 +18,7 @@ jobs:
       - run:
           working_directory: ./ValueTests
           name: "test-svc"
-          command: |
+          command:
             dotnet test -c Release -o /app
 
 #     - run:
@@ -28,7 +28,7 @@ jobs:
       - run:
 #          working_directory: /app
           name: Running App
-          command: |
+          command:
 #            dotnet /app/ValueApi.dll
              dotnet run
 #            docker run -dp "5000:5000" "docker.io/edwardsdl/sample-netcore:latest"
