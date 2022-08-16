@@ -2,40 +2,19 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: mcr.microsoft.com/dotnet/sdk:6.0
+      - image: bct01/netcore-pipeline:latest
     steps:
-#      - setup_remote_docker:
-#          docker_layer_caching: true
-      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
-          name: Restore packages
-          command:
-            dotnet restore
+          name: Clone
+          command: /stages/01_clone.sh
       - run:
-          name: Build App
-          command:
-            dotnet build -c Release -o /app  
+          name: Build
+          command: /stages/02_build.sh
       - run:
-          working_directory: ./ValueTests
-          name: "test-svc"
-          command:
-            dotnet test -c Release -o /app
-
-#     - run:
-#         name: Archive
-#          command: stages/04_archive.sh
-
+          name: Test
+          command: /stages/03_test.sh
       - run:
-#          working_directory: /app
-          name: Running App
-          command:
-            dotnet /app/ValueApi.dll
-#             dotnet run
-#            docker run -dp "5000:5000" "docker.io/edwardsdl/sample-netcore:latest"
-            
-#container_port=$(jq -r .deploy.containerPort pipeline.json)
-#registry=$(jq -r .archive.registry pipeline.json)
-#repository=$(jq -r .archive.repository pipeline.json)
-#image="${registry}/${repository}:latest"
-
-#docker run -dp "${container_port}:${container_port}" "${image}"
+          name: Archive
+          command: /stages/04_archive.sh
