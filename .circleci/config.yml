@@ -23,7 +23,10 @@ jobs:
 
       - run:
           name: Archive
-          command: stages/04_archive.sh
+          command: |
+            docker login -u "${DOCKER_USERNAME?:}" -p "${DOCKER_PASSWORD?:}" "${registry}"
+            docker build -t "${image}" .
+            docker push "docker.io/bct01/sample-netcore-01"
 
 #      - run:
 ##          working_directory: /app
@@ -32,5 +35,4 @@ jobs:
 #            dotnet /app/ValueApi.dll
 ##             dotnet run
 ##            docker run -dp "5000:5000" "docker.io/edwardsdl/sample-netcore:latest"
-           
-
+         
