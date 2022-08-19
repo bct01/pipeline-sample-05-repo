@@ -21,8 +21,8 @@ jobs:
           command:
             dotnet test -c Release -o /app
 
-     - run:
-         name: Archive
+      - run:
+          name: Archive
           command: stages/04_archive.sh
 
 #      - run:
