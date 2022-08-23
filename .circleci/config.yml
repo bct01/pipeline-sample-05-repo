@@ -11,7 +11,7 @@ jobs:
         name: Archive
         command: |
           docker login -u "${DOCKER_USERNAME}" -p "{$DOCKER_PASSWORD}" "${registry}"
-          docker build -t "${DOCKER_IMAGE}"  .
+          docker build -t "${image}"  .
 workflows:
   workflow:
     jobs:
