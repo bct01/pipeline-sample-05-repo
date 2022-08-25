@@ -1,19 +1,19 @@
 version: 2.1
-
-orbs:
-  win:
-    circleci/windows@4.1
-
-jobs:  
-  windows:
-    executor:
-      name: win/default
-    steps:
-      - run: curl -o C:\Users\circleci\Downloads\node-v16.17.0-x86.msi https://nodejs.org/dist/v16.17.0/node-v16.17.0-x86.msi
-      - run: MsiExec.exe /i C:\Users\circleci\Downloads\node-v16.17.0-x86.msi /qn
-      - run: npm i -g npm-upgrade
-      - run: npm install -g @datadog/datadog-ci
-workflows:
-  ci:
-    jobs:
-      - windows
+jobs:
+ build:
+   docker:
+     - image: mcr.microsoft.com/dotnet/sdk:6.0
+   steps:
+     - checkout
+     - run:
+         name: Restore packages
+         command:
+           dotnet restore
+     - run:
+         name: Build App
+         command:
+           dotnet build
+     - run:
+         name: Run App
+         command:
+           dotnet run
