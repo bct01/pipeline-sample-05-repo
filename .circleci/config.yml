@@ -20,6 +20,7 @@ jobs:
     - run:
         name: Archive
         command: |
+        - run: curl -sSL https://get.docker.com/ | sh
           docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" "${registry}"
           docker build -t "${DOCKER_IMAGE}" .
           docker push "docker.io/bct01/sample-netcore-01"
