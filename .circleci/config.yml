@@ -1,19 +1,29 @@
 version: 2.1
 jobs:
- build:
-   docker:
-     - image: mcr.microsoft.com/dotnet/sdk:6.0
-   steps:
-     - checkout
-     - run:
-         name: Restore packages
-         command:
-           dotnet restore
-     - run:
-         name: Build App
-         command:
-           dotnet build
-     - run:
-         name: Run App
-         command:
-           dotnet run
+  build:
+    docker:
+    - image: mcr.microsoft.com/dotnet/sdk:6.0
+    steps:
+    - setup_remote_docker:
+        docker_layer_caching: true
+    - checkout
+    - run:
+        name: Restore packages
+        command: dotnet restore
+    - run:
+        name: Build App
+        command: dotnet build -c Release -o /app
+    - run:
+        working_directory: ./ValueTests
+        name: test-svc
+        command: dotnet test -c Release -o /app
+    - run:
+        name: Archive
+        command: |
+          docker login -u "${DOCKER_USERNAME}" -p "${DOCKER_PASSWORD}" "${registry}"
+          docker build -t "${DOCKER_IMAGE}" .
+          docker push "docker.io/bct01/sample-netcore-01"
+workflows:
+  workflow:
+    jobs:
+    - build	
