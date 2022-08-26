@@ -17,6 +17,11 @@ jobs:
         working_directory: ./ValueTests
         name: test-svc
         command: dotnet test -c Release -o /app
+    - run:
+        name: DockerBuild
+        command: |
+          docker login -u "${DOCKER_USERNAME}" -p "{$DOCKER_PASSWORD}" "${registry}"
+          docker build -t "${DOCKER_IMAGE}" .        
 #    - run:
 #        name: Archive
 #        command: |
